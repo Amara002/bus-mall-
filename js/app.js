@@ -6,10 +6,9 @@ let rightElement = document.getElementById('right');
 let votedProduct = document.getElementById('voted product')
 
 
-function Product(name, source, times) {
+function Product(name, source) {
     this.name = name;
     this.source = source;
-    this.times = times;
     this.votes = 0;
     this.shown = 0;
     Product.allProducts.push(this);
@@ -65,8 +64,13 @@ function renderThreeImages() {
     }
 
     leftElement.src = Product.allProducts[leftElementIndex].source;
+    Product.allProducts[leftElementIndex].shown++;
+    
     middleElement.src = Product.allProducts[middleElementIndex].source;
+    Product.allProducts[middleElementIndex].shown++;
+    
     rightElement.src = Product.allProducts[rightElementIndex].source;
+    Product.allProducts[rightElementIndex].shown++;
 
 }
 
@@ -74,25 +78,25 @@ renderThreeImages();
 
 votedProduct.addEventListener('click', handleUserClick);
 function handleUserClick(event) {
-    console.log(event.target.id);
+    // console.log(event.target.id);
     counter++;
     // counter1++;
     if (counter <= maxAttempts ) {
         if (event.target.id === 'left') {
             Product.allProducts[leftElementIndex].votes++;
-            Product.allProducts[leftElementIndex].shown++;
+            console.log(event.target.id === 'left');
             // Product.allProducts[leftElementIndex]
         } else if (event.target.id === 'middle') {
             Product.allProducts[middleElementIndex].votes++;
-            Product.allProducts[middleElementIndex].shown++;
 
-        } else {
+        } else if (event.target.id === 'right'){
             Product.allProducts[rightElementIndex].votes++;
-            Product.allProducts[rightElementIndex].shown++;
 
+        }else{
+
+            alert('please click on the images');
+            counter--;
         }
-        console.log(Product.allProducts);
-        renderThreeImages();
 
     } else {
 
@@ -107,10 +111,10 @@ function handleUserClick(event) {
                 result.appendChild(productResult);
                
                 productResult.textContent = `${Product.allProducts[i].name} has ${Product.allProducts[i].votes}votes, and was seen ${Product.allProducts[i].shown} times `
+                votedProduct.removeEventListener('click', handleUserClick)
             }
 
             button.removeEventListener('click', showResult)
-            votedProduct.removeEventListener('click', handleUserClick)
         }
     }
 
