@@ -17,7 +17,7 @@ function Product(name, source) {
     this.shown = 0;
     Product.allProducts.push(this);
     namesArr.push(this.name);
-
+    // updateStorage();
 }
 
 Product.allProducts = [];
@@ -45,7 +45,8 @@ new Product('usb', 'img/usb.gif');
 new Product('water-can', 'img/water-can.jpg');
 new Product('wine-glass', 'img/wine-glass.jpg');
 
-console.log(Product.allProducts);
+console.log( 'bro', Product.allProducts);
+console.log('scd', Product.firstShown);
 
 let maxAttempts = 10;
 let counter = 0;
@@ -90,6 +91,8 @@ function renderThreeImages() {
 
 
 
+
+
     middleElement.src = Product.allProducts[middleElementIndex].source;
     Product.allProducts[middleElementIndex].shown++;
 
@@ -97,9 +100,56 @@ function renderThreeImages() {
     Product.allProducts[rightElementIndex].shown++;
     
 
+
 }
 
 renderThreeImages();
+
+
+function updateStorage() {
+    console.log(JSON);
+    // let arrayString = JSON.stringify(votesArr);
+    // let arrayString1 = JSON.stringify(shownArr);
+    
+
+    // console.log(arrayString);
+    // console.log(arrayString1);
+
+    // localStorage.setItem('productVotes', arrayString);
+    // localStorage.setItem('productShown', arrayString1);
+
+
+    let arrayString = JSON.stringify(Product.allProducts);
+    localStorage.setItem('product', arrayString);
+
+}
+
+function getProduct() {
+
+    let data = localStorage.getItem('product');
+    let storeData = JSON.parse(data);
+    if (data !== null) {
+        Product.allProducts = storeData
+
+    }
+
+
+    // let votedData=JSON.parse(localStorage.getItem('productVotes'));
+    // let shownData=JSON.parse(localStorage.getItem('productShown'));
+
+    // // console.log(productData);
+
+    // // if the first time we visit the page, there will not be an array of objects inside the local storage so we should handle it here:
+    // if (votedData !==null && shownData !==null) {
+    //   votesArr=votedData;
+    //   shownArr=shownData;
+    // }
+
+    // // renderThreeImages();
+
+}
+
+
 
 votedProduct.addEventListener('click', handleUserClick);
 
@@ -142,6 +192,8 @@ function handleUserClick(event) {
 
         // show the chart
         chart();
+        updateStorage();
+
 
         votedProduct.removeEventListener('click', handleUserClick)
 
@@ -167,6 +219,7 @@ function handleUserClick(event) {
 
 
 }
+
 
 function chart() {
     let ctx = document.getElementById('myChart').getContext('2d');
@@ -207,3 +260,7 @@ function chart() {
     });
 
 }
+
+
+getProduct();
+

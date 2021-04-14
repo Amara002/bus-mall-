@@ -1,4 +1,4 @@
-# Lab: 12 - Add a chart to your BusMall app 
+# Lab: 13 - Add local storage to BusMall 
 ## bus-mall-
 ## Author: Amara Al Balkhi
 ## Links
@@ -12,4 +12,4 @@
 ***It was clear***
 
 - How long did it take you to complete this assignment? And, before you started, how long did you think it would take you to complete this assignment?
-***It took 5 hours from me. I think I will do that by 30 minutes.***
+***It took 4 hours from me. I think I will do that by 10 minutes.***
