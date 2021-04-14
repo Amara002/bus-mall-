@@ -8,6 +8,8 @@ let rightElement = document.getElementById('right');
 let namesArr = [];
 let votesArr = [];
 let shownArr = [];
+
+ 
 function Product(name, source) {
     this.name = name;
     this.source = source;
@@ -77,6 +79,7 @@ function renderThreeImages() {
 
     leftElement.src = Product.allProducts[leftElementIndex].source;
     Product.allProducts[leftElementIndex].shown++;
+ lab12-busmall
 
     middleElement.src = Product.allProducts[middleElementIndex].source;
     Product.allProducts[middleElementIndex].shown++;
@@ -86,6 +89,14 @@ function renderThreeImages() {
 
    
 
+    
+    middleElement.src = Product.allProducts[middleElementIndex].source;
+    Product.allProducts[middleElementIndex].shown++;
+    
+    rightElement.src = Product.allProducts[rightElementIndex].source;
+    Product.allProducts[rightElementIndex].shown++;
+ main
+
 }
 
 renderThreeImages();
@@ -93,12 +104,15 @@ renderThreeImages();
 votedProduct.addEventListener('click', handleUserClick);
 
 function handleUserClick(event) {
-    console.log(event.target.id);
+    // console.log(event.target.id);
     counter++;
     // counter1++;
     if (counter <= maxAttempts) {
         if (event.target.id === 'left') {
             Product.allProducts[leftElementIndex].votes++;
+
+            console.log(event.target.id === 'left');
+ 
             // Product.allProducts[leftElementIndex]
         } else if (event.target.id === 'middle') {
             Product.allProducts[middleElementIndex].votes++;
@@ -110,8 +124,16 @@ function handleUserClick(event) {
             alert('please press on image');
             counter--;
 
+        } else if (event.target.id === 'right'){
+            Product.allProducts[rightElementIndex].votes++;
+
+        }else{
+
+            alert('please click on the images');
+            counter--;
         }
         renderThreeImages();
+
 
     } else {
 
@@ -141,9 +163,12 @@ function handleUserClick(event) {
                 result.appendChild(productResult);
 
                 productResult.textContent = `${Product.allProducts[i].name} has ${Product.allProducts[i].votes}votes, and was seen ${Product.allProducts[i].shown} times `
+                votedProduct.removeEventListener('click', handleUserClick)
             }
             button.removeEventListener('click', showResult);
 
+
+//             button.removeEventListener('click', showResult)
         }
     }
 
