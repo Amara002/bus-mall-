@@ -48,7 +48,7 @@ new Product('wine-glass', 'img/wine-glass.jpg');
 console.log( 'bro', Product.allProducts);
 console.log('scd', Product.firstShown);
 
-let maxAttempts = 10;
+let maxAttempts = 25;
 let counter = 0;
 // let counter1 = 0;
 
